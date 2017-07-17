@@ -1,0 +1,3 @@
+[submodule "vm-sdk"]
+	path = vm-sdk
+	url = https://git.devuan.org/sdk/vm-sdk

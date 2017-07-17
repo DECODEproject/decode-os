@@ -1,0 +1,175 @@
+#!/usr/bin/env zsh
+# Copyright (c) 2017 Dyne.org Foundation
+#
+# decode.blend is written and maintained by Ivan J. <parazyd@dyne.org>
+#
+# This source code is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this source code. If not, see <http://www.gnu.org/licenses/>.
+
+## libdevuansdk build script for decode-os
+
+source "$R/../config"
+
+blend_preinst() {
+	fn blend_preinst
+	req=(strapdir)
+	ckreq || return 1
+
+	notice "executing $blend_name preinst"
+
+	add-user decode decode
+}
+
+blend_postinst() {
+	fn blend_postinst
+	req=(strapdir)
+	ckreq || return 1
+
+	notice "executing $blend_name postinst"
+
+	nopackage=(musl tomb golang)
+	for app in $nopackage; do
+		blend_install_${app} || zerr
+	done || zerr
+
+	blend_finalize || zerr
+}
+
+## {{{ blend_install_musl()
+blend_install_musl() {
+	fn blend_install_musl
+	req=(strapdir musl_version musl_url)
+	ckreq || return 1
+
+	notice "cloning musl gits"
+	sudo git clone "$musl_url" "$strapdir/root/musl" || zerr
+
+	notice "installing musl in $strapdir"
+
+	cat <<EOF | sudo tee ${strapdir}/install-musl >/dev/null
+#!/bin/sh
+cd /root/musl
+git checkout ${musl_version}
+./configure && \
+make ${MAKEOPTS} && make install || exit 1
+cd ..
+rm -rf musl
+EOF
+	chroot-script install-musl || zerr
+}
+## }}}
+## {{{ blend_install_tomb()
+blend_install_tomb() {
+	fn blend_install_tomb
+	req=(strapdir tomb_version tomb_url)
+	ckreq || return 1
+
+	notice "cloning tomb gits"
+	sudo git clone "$tomb_url" "$strapdir/root/tomb" || zerr
+
+	notice "installing tomb in $strapdir"
+	cat <<EOF | sudo tee ${strapdir}/install-tomb >/dev/null
+#!/bin/sh
+cd /root/tomb
+git checkout ${tomb_version}
+make install
+
+cd extras/kdf-keys
+make && make install || exit 1
+
+cd /root
+rm -rf tomb
+EOF
+	chroot-script install-tomb || zerr
+}
+## }}}
+## {{{ blend_install_golang()
+blend_install_golang() {
+	fn blend_install_golang
+	req=(strapdir golang_version golang_arch golang_url)
+	ckreq || return 1
+
+	notice "grabbing golang tarball"
+	sudo curl -o "$strapdir/usr/local/go.tgz" "${golang_url}"
+
+	notice "unpacking golang in $strapdir"
+	cat <<EOF | sudo tee ${strapdir}/install-golang >/dev/null
+#!/bin/sh
+cd /usr/local
+tar xvf go.tgz
+rm -f go.tgz
+EOF
+	chroot-script install-golang || zerr
+}
+## }}}
+
+
+## {{{ blend_finalize()
+blend_finalize() {
+	fn blend_finalize
+	req=(strapdir)
+	ckreq || return 1
+
+	cat <<EOF | sudo tee ${strapdir}/finalize >/dev/null
+#!/bin/sh
+
+## misc
+rm -rf /usr/local/share/zsh/site-functions
+sed -i -e 's/devuan/decode/' /etc/hosts
+
+## cleanup
+apt-get --yes --force-yes purge ${finalize_purge_packages}
+apt-get --yes --force-yes autoremove
+apt-get clean
+apt-get update
+
+cleanupfiles="
+	/var/log/bootstrap.log
+	/var/log/dpkg.log
+	/var/log/alternatives.log
+	/var/log/fontconfig.log
+	/var/log/apt
+	/var/log/fsck
+	/var/log/ConsoleKit
+	/var/lib/polkit-1
+"
+
+for i in \$cleanupfiles ; do
+	rm -rf \$i
+done
+
+updatedb
+EOF
+
+	chroot-script -d finalize || zerr
+}
+## }}}
+## {{{ conf_print_sorceslist()
+conf_print_sourceslist() {
+	fn conf_print_sourceslist "(override)"
+
+	cat <<EOF
+## package repositories
+deb http://auto.mirror.devuan.org/merged ascii          main
+deb http://auto.mirror.devuan.org/merged ascii-updates  main
+deb http://auto.mirror.devuan.org/merged ascii-security main
+deb http://auto.mirror.devuan.org/devuan experimental   main
+
+## source repositories
+#deb-src http://auto.mirror.devuan.org/merged ascii          main
+#deb-src http://auto.mirror.devuan.org/merged ascii-updates  main
+#deb-src http://auto.mirror.devuan.org/merged ascii-security main
+#deb-src http://auto.mirror.devuan.org/devuan experimental   main
+EOF
+}
+## }}}

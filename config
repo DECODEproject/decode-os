@@ -1,0 +1,67 @@
+#!/usr/bin/env zsh
+
+blend_name="decode"
+blend_vers="0.0"
+image_name="${blend_name}-${blend_vers}-${arch}"
+
+
+golang_version="1.8.3"
+golang_arch="amd64"
+golang_url="https://storage.googleapis.com/golang/go${golang_version}.linux-${golang_arch}.tar.gz"
+
+tomb_version="v2.4"
+tomb_url="https://github.com/dyne/tomb.git"
+
+musl_version="v.1.1.16"
+musl_url="git://git.musl-libc.org/musl"
+
+
+extra_packages+=(
+	eudev
+
+	zsh
+	tmux
+	curl
+	cryptsetup
+	openssh-server
+	openssh-client
+	gnupg2
+	dirmngr
+	pcsc-tools
+
+	busybox-static
+	busybox-syslogd
+
+	lsof
+
+	openjdk-8-jre-headless
+
+	mlocate
+	gettext
+	miscfiles
+
+	#autoconf
+	#automake
+	build-essential
+	gcc-6-plugin-dev
+	libncurses5-dev
+	flex
+	libbison-dev
+	libtool-bin
+	libtool
+	libssl-dev
+	libgcrypt20
+	libgcrypt20-dev
+	equivs
+)
+
+purge_packages=(
+	rsyslog
+)
+
+finalize_purge_packages=(
+	#autoconf
+	#automake
+	#flex
+	#equivs
+)
