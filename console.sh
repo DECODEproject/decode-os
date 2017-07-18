@@ -8,7 +8,15 @@ cat <<EOF > $sdk/.zshrc
 pushd \$ZDOTDIR > /dev/null
 # check that all submodules are there, useful for git repos
 [[ -r lib/zuper/zuper ]] || git submodule update --init
+[[ -r lib/libdevuansdk/LICENSE ]] || git submodule update --init
+[[ -r lib/libdevuansdk/extra/debootstrap/debootstrap ]] || {
+   pushd lib/libdevuansdk > /dev/null
+   git submodule update --init
+   popd
+}
+
 source sdk
+load devuan decode
 popd > /dev/null
 EOF
 
