@@ -6,6 +6,7 @@ rules according to authenticated entitlements on attributes.
 
 For stable releases see https://files.dyne.org/decode
 
+
 ## Requirements
 
 A GNU/Linux system is required in order to build DECODE OS.
@@ -51,7 +52,6 @@ build_iso_dist() {
 	build_kernel_${arch}    || { zerr; wrapup }
 	iso_setup_isolinux      || { zerr; wrapup }
 	iso_write_isolinux_cfg  || { zerr; wrapup }
-	#[[ $INSTALLER = 1 ]] && iso_setup_installer || zerr
 	blend_postinst          || { zerr; wrapup }
 	fill_apt_cache          || { zerr; wrapup }
 	iso_squash_strap        || { zerr; wrapup }
@@ -72,14 +72,10 @@ build_vagrant_dist() {
 }
 ```
 
-
-
-
 The `build_vagrant_dist` target is a helper that executes a sequence
 of steps, some of them common to other helpers (hence
 combinable). Here below the full list of build steps executed by
 `build_vagrant_dist`
-
 
 ## Acknowledgments
 

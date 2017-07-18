@@ -17,8 +17,13 @@ musl_url="git://git.musl-libc.org/musl"
 
 
 extra_packages+=(
-	eudev
 
+	# application space
+	openjdk-8-jre-headless
+	libversioneer-clojure
+
+	# base system
+	eudev
 	zsh
 	tmux
 	curl
@@ -29,19 +34,23 @@ extra_packages+=(
 	dirmngr
 	pcsc-tools
 
+	# minimalism
 	busybox-static
 	busybox-syslogd
 
-	lsof
-
-	openjdk-8-jre-headless
-
+	# utilities	
 	mlocate
 	gettext
 	miscfiles
 
-	#autoconf
-	#automake
+	# troubleshooting
+	lsof
+	htop
+	iftop
+	iotop
+	strace
+
+	# build tools
 	build-essential
 	gcc-6-plugin-dev
 	libncurses5-dev
@@ -56,6 +65,7 @@ extra_packages+=(
 )
 
 purge_packages=(
+	# temporary fix for ASCII bug on rsyslog
 	rsyslog
 )
 

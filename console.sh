@@ -1,5 +1,7 @@
 #!/bin/sh
 
+if ! [ -r vm-sdk ]; then git submodule update --init; fi
+
 sdk="${1:-vm-sdk}"
 
 cat <<EOF > $sdk/.zshrc
