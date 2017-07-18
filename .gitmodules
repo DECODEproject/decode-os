@@ -1,3 +1,4 @@
 [submodule "vm-sdk"]
 	path = vm-sdk
-	url = https://git.devuan.org/sdk/vm-sdk
+	url = https://github.com/dyne/vm-sdk.git
+
