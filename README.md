@@ -35,40 +35,40 @@ Here below the sequences of build steps executed by each target:
 
 ```zsh
 build_image_dist() {
-	bootstrap_complete_base            || { zerr; wrapup }
-	blend_preinst                      || { zerr; wrapup }
-	image_prepare_raw                  || { zerr; wrapup }
-	image_partition_raw_${parted_type} || { zerr; wrapup }
-	build_kernel_${arch}               || { zerr; wrapup }
-	blend_postinst                     || { zerr; wrapup }
-	rsync_to_raw_image                 || { zerr; wrapup }
-	image_pack_dist                    || { zerr; wrapup }
+	bootstrap_complete_base
+	blend_preinst
+	image_prepare_raw
+	image_partition_raw_${parted_type}
+	build_kernel_${arch}
+	blend_postinst
+	rsync_to_raw_image
+	image_pack_dist
 }
 
 build_iso_dist() {
-	bootstrap_complete_base || { zerr; wrapup }
-	blend_preinst           || { zerr; wrapup }
-	iso_prepare_strap       || { zerr; wrapup }
-	build_kernel_${arch}    || { zerr; wrapup }
-	iso_setup_isolinux      || { zerr; wrapup }
-	iso_write_isolinux_cfg  || { zerr; wrapup }
-	blend_postinst          || { zerr; wrapup }
-	fill_apt_cache          || { zerr; wrapup }
-	iso_squash_strap        || { zerr; wrapup }
-	iso_xorriso_build       || { zerr; wrapup }
+	bootstrap_complete_base
+	blend_preinst
+	iso_prepare_strap
+	build_kernel_${arch}
+	iso_setup_isolinux
+	iso_write_isolinux_cfg
+	blend_postinst
+	fill_apt_cache
+	iso_squash_strap
+	iso_xorriso_build
 }
 
 build_vagrant_dist() {
-	image_${imageformat}_as_strapdir   || { zerr; wrapup }
-	bootstrap_complete_base            || { zerr; wrapup }
-	vm_inject_overrides                || { zerr; wrapup }
-	blend_preinst                      || { zerr; wrapup }
-	vm_setup_grub                      || { zerr; wrapup }
-	blend_postinst                     || { zerr; wrapup }
-	vm_umount_${imageformat}           || { zerr; wrapup }
-	vm_vbox_setup                      || { zerr; wrapup }
-	vm_vagrant_package                 || { zerr; wrapup }
-	vm_pack_dist                       || { zerr; wrapup }
+	image_${imageformat}_as_strapdir
+	bootstrap_complete_base
+	vm_inject_overrides
+	blend_preinst
+	vm_setup_grub
+	blend_postinst
+	vm_umount_${imageformat}
+	vm_vbox_setup
+	vm_vagrant_package
+	vm_pack_dist
 }
 ```
 
@@ -76,6 +76,11 @@ The `build_vagrant_dist` target is a helper that executes a sequence
 of steps, some of them common to other helpers (hence
 combinable). Here below the full list of build steps executed by
 `build_vagrant_dist`
+
+The `bootstrap_complete_base` step creates a base system tarball that
+can be reused by any target, it is found inside `*_sdk/tmp` for each
+sdk and to save time and computation it can be copied in place for
+each sdk if the base system doesn't differ.
 
 ## Acknowledgments
 
