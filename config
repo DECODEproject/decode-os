@@ -15,6 +15,8 @@ tomb_url="https://github.com/dyne/tomb.git"
 musl_version="v.1.1.16"
 musl_url="git://git.musl-libc.org/musl"
 
+size="4098"
+filesystem="xfs"
 
 extra_packages+=(
 
@@ -42,6 +44,8 @@ extra_packages+=(
 	mlocate
 	gettext
 	miscfiles
+	# for xfs
+	xfsprogs
 
 	# troubleshooting
 	lsof
@@ -67,6 +71,8 @@ extra_packages+=(
 purge_packages=(
 	# temporary fix for ASCII bug on rsyslog
 	rsyslog
+	# dbus
+	# gnome-icon-theme
 )
 
 finalize_purge_packages=(
