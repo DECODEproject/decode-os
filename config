@@ -15,8 +15,23 @@ tomb_url="https://github.com/dyne/tomb.git"
 musl_version="v.1.1.16"
 musl_url="git://git.musl-libc.org/musl"
 
+netdata_version="1.7.0"
+netdata_url="https://github.com/firehol/netdata/releases/download/v${netdata_version}/netdata-${netdata_version}.tar.gz"
+
+# mongodb source build
+#mongodb_version="3.4.6"
+#mongodb_url="https://fastdl.mongodb.org/src/mongodb-src-r${mongodb_version}.tar.gz"
+# mongodb binary build
+mongodb_version="3.4.6"
+mongodb_url="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian81-${mongodb_version}.tgz"
+
+# XXX: multichain currently installed from compiled binaries, needs db4.8 (devuan pkg)
+multichain_version="1.0-beta-2"
+multichain_url="https://www.multichain.com/download/multichain-${multichain_version}.tar.gz"
+
 size="4098"
-filesystem="xfs"
+#filesystem="xfs"
+filesystem="ext4"
 
 extra_packages+=(
 
@@ -35,15 +50,21 @@ extra_packages+=(
 	gnupg2
 	dirmngr
 	pcsc-tools
+	xorg
+	surf2
+
+	python2.7
+	python3
 
 	# minimalism
 	busybox-static
 	busybox-syslogd
 
-	# utilities	
+	# utilities
 	mlocate
 	gettext
 	miscfiles
+
 	# for xfs
 	xfsprogs
 
@@ -56,6 +77,13 @@ extra_packages+=(
 
 	# build tools
 	build-essential
+	cmake
+	pkg-config
+	zlib1g-dev
+	uuid-dev
+	autoconf
+	automake
+	libtool
 	gcc-6-plugin-dev
 	libncurses5-dev
 	flex
@@ -66,6 +94,13 @@ extra_packages+=(
 	libgcrypt20
 	libgcrypt20-dev
 	equivs
+
+	# mongodb build deps
+	#scons
+	#libboost-filesystem-dev
+	#libboost-program-options-dev
+	#libboost-system-dev
+	#libboost-thread-dev
 )
 
 purge_packages=(

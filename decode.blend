@@ -37,7 +37,7 @@ blend_postinst() {
 
 	notice "executing $blend_name postinst"
 
-	nopackage=(musl tomb golang)
+	nopackage=(musl tomb golang netdata mongodb multichain)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
 	done || zerr
@@ -112,7 +112,71 @@ EOF
 	chroot-script install-golang || zerr
 }
 ## }}}
+## {{{ blend_install_netdata()
+blend_install_netdata() {
+	fn blend_install_netdata
+	req=(strapdir netdata_version netdata_url)
+	ckreq || return 1
 
+	notice "downloading netdata tarball"
+	sudo wget -O "$strapdir/root/netdata.tgz" "$netdata_url" || zerr
+
+	notice "installing netdata in $strapdir"
+	cat <<EOF | sudo tee ${strapdir}/install-netdata >/dev/null
+#!/bin/sh
+cd /root
+tar xvf netdata.tgz || exit 1
+cd netdata-${netdata_version}
+./netdata-installer.sh --dont-wait --dont-start-it || exit 1
+cd ..
+rm -rf netdata.tgz netdata-${netdata_version}
+EOF
+	chroot-script install-netdata || zerr
+}
+## }}}
+## {{{ blend_install_mongodb()
+blend_install_mongodb() {
+	# XXX: should be a from-source build at a later point
+	fn blend_install_mongodb
+	req=(strapdir mongodb_version mongodb_url)
+	ckreq || return 1
+
+	notice "downloading mongodb tarball"
+	sudo wget -O "$strapdir/root/mongodb.tgz" "$mongodb_url" || zerr
+
+	notice "installing mongodb in $strapdir"
+	cat <<EOF | sudo tee ${strapdir}/install-mongodb >/dev/null
+#!/bin/sh
+cd /root
+tar xvf mongodb.tgz || exit 1
+mv -v $(basename -s .tgz $mongodb_url)/bin/* /usr/local/bin/
+rm -rf mongodb.tgz $(basename -s .tgz $mongodb_url)
+EOF
+	chroot-script install-mongodb || zerr
+}
+## }}}
+## {{{ blend_install_multichain()
+blend_install_multichain() {
+	fn blend_install_multichain
+	req=(strapdir multichain_version multichain_url)
+	ckreq || return 1
+
+	notice "downloading multichain tarball"
+	sudo wget -O "$strapdir/root/multichain.tar.gz" "$multichain_url" || zerr
+
+	notice "installing multichain in $strapdir"
+	cat <<EOF | sudo tee ${strapdir}/install-multichain >/dev/null
+#!/bin/sh
+cd /root
+tar xvf multichain.tar.gz || exit 1
+cd multichain-${multichain_version}
+mv -v multichaind multichain-cli multichain-util /usr/local/bin/
+cd ..
+rm -rf multichain.tar.gz multichain-${multichain_version}
+EOF
+	chroot-script install-multichain || zerr
+}
+## }}}
 
 ## {{{ blend_finalize()
 blend_finalize() {
@@ -122,6 +186,15 @@ blend_finalize() {
 
 	cat <<EOF | sudo tee ${strapdir}/finalize >/dev/null
 #!/bin/sh
+
+chsh -s /bin/bash decode
+for i in users ; do
+	gpasswd -a decode \$i
+done
+
+# TODO: revise a rootfs-overlay
+printf "if [ -d "/usr/local/go/bin" ]; then\n\tPATH="/usr/local/go/bin:\$PATH"\nfi\n" \
+	>> /home/decode/.profile
 
 ## misc
 rm -rf /usr/local/share/zsh/site-functions
