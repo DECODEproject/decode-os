@@ -33,6 +33,8 @@ size="4098"
 #filesystem="xfs"
 filesystem="ext4"
 
+TAR_STAGE4=true
+
 extra_packages+=(
 
 	# application space
