@@ -13,12 +13,18 @@ A GNU/Linux system is required in order to build DECODE OS.
 
 Here a list of package dependencies:
 ```
-zsh debootstrap sudo kpartx cgpt xz-utils qemu qemu-utils
+zsh sudo cgpt xz-utils qemu qemu-utils
 ```
 
 In addition one must install `vagrant` and `virtualbox` from latest
 published packages (do not use distro provided packages, as they are
 updated).
+
+To update this repository, simply issue:
+
+```
+$ git pull origin master && git submodule update --init --recursive --checkout
+```
 
 
 ## Getting started
