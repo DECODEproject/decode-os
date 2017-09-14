@@ -192,9 +192,9 @@ for i in users ; do
 	gpasswd -a decode \$i
 done
 
-# TODO: revise a rootfs-overlay
-printf "if [ -d "/usr/local/go/bin" ]; then\n\tPATH="/usr/local/go/bin:\$PATH"\nfi\n" \
-	>> /home/decode/.profile
+
+sed -e 's/UsePAM yes/UsePAM no/' -i /etc/ssh/sshd_config
+
 
 ## misc
 rm -rf /usr/local/share/zsh/site-functions
