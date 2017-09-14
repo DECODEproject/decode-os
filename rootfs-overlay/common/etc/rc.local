@@ -1,0 +1,8 @@
+#!/bin/sh
+# rc.local for base images
+
+[ -f /etc/ssh/ssh_host_rsa_key.pub ] || dpkg-reconfigure openssh-server
+
+netdata
+
+exit 0
