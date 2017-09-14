@@ -5,7 +5,7 @@ blend_vers="0.0"
 image_name="${blend_name}-${blend_vers}-${arch}"
 
 
-golang_version="1.8.3"
+golang_version="1.9"
 golang_arch="amd64"
 golang_url="https://storage.googleapis.com/golang/go${golang_version}.linux-${golang_arch}.tar.gz"
 
@@ -22,11 +22,11 @@ netdata_url="https://github.com/firehol/netdata/releases/download/v${netdata_ver
 #mongodb_version="3.4.6"
 #mongodb_url="https://fastdl.mongodb.org/src/mongodb-src-r${mongodb_version}.tar.gz"
 # mongodb binary build
-mongodb_version="3.4.6"
+mongodb_version="3.4.9"
 mongodb_url="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian81-${mongodb_version}.tgz"
 
 # XXX: multichain currently installed from compiled binaries, needs db4.8 (devuan pkg)
-multichain_version="1.0-beta-2"
+multichain_version="1.0.1"
 multichain_url="https://www.multichain.com/download/multichain-${multichain_version}.tar.gz"
 
 size="4098"
