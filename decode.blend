@@ -42,6 +42,10 @@ blend_postinst() {
 		blend_install_${app} || zerr
 	done || zerr
 
+	notice "copying rootfs-overlay"
+	rootfs_overlay_path="$R/../rootfs-overlay"
+	sudo cp -rav "${rootfs_overlay_path}/*" "${strapdir}/"
+
 	blend_finalize || zerr
 }
 
