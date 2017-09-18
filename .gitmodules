@@ -4,3 +4,6 @@
 [submodule "arm-sdk"]
 	path = arm-sdk
 	url = https://github.com/dyne/arm-sdk
+[submodule "live-sdk"]
+	path = live-sdk
+	url = https://github.com/dyne/live-sdk
