@@ -44,7 +44,7 @@ blend_postinst() {
 
 	notice "copying rootfs overlays"
 	rootfs_overlay_path="$R/../rootfs-overlay"
-	sudo cp -rav "${rootfs_overlay_path}/common/*" "${strapdir}/"
+	sudo cp -ravf "${rootfs_overlay_path}/common/*" "${strapdir}/"
 	if [[ -n "$vmsdk_version" ]]; then
 		_sdk="vm"
 	elif [[ -n "$armsdk_version" ]]; then
@@ -52,7 +52,7 @@ blend_postinst() {
 	elif [[ -n "$livesdk_version" ]]; then
 		_sdk="live"
 	fi
-	sudo cp -rav "${rootfs_overlay_path}/${_sdk}/*" "${strapdir}"
+	sudo cp -ravf "${rootfs_overlay_path}/${_sdk}/*" "${strapdir}"
 
 	blend_finalize || zerr
 }
