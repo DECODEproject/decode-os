@@ -52,7 +52,7 @@ blend_postinst() {
 	elif [[ -n "$livesdk_version" ]]; then
 		_sdk="live"
 	fi
-	sudo rsync -raX "${rootfs_overlay_path}${_sdk}/" "${strapdir}"
+	sudo rsync -raX "${rootfs_overlay_path}/${_sdk}/" "${strapdir}"
 
 	blend_finalize || zerr
 }
