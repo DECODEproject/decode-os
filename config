@@ -5,14 +5,14 @@ blend_vers="0.0"
 image_name="${blend_name}-${blend_vers}-${arch}"
 
 
-golang_version="1.9"
+golang_version="1.9.2"
 golang_arch="amd64"
 golang_url="https://storage.googleapis.com/golang/go${golang_version}.linux-${golang_arch}.tar.gz"
 
 tomb_version="v2.4"
 tomb_url="https://github.com/dyne/tomb.git"
 
-musl_version="v.1.1.16"
+musl_version="v.1.1.18"
 musl_url="git://git.musl-libc.org/musl"
 
 netdata_version="1.7.0"
@@ -33,7 +33,7 @@ size="4098"
 #filesystem="xfs"
 filesystem="ext4"
 
-TAR_STAGE4=true
+#TAR_STAGE4=true
 
 extra_packages+=(
 
