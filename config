@@ -29,7 +29,6 @@ filesystem="btrfs"
 #TAR_STAGE4=true
 
 extra_packages+=(
-
 	# application space
 	openjdk-8-jre-headless
 	libversioneer-clojure
@@ -41,6 +40,7 @@ extra_packages+=(
 	curl
 	cryptsetup
 	openssh-server
+	btrfs-tools
 	openssh-client
 	gnupg2
 	dirmngr
@@ -53,7 +53,6 @@ extra_packages+=(
 
 	# minimalism
 	busybox-static
-	busybox-syslogd
 
 	# utilities
 	mlocate
@@ -89,18 +88,9 @@ extra_packages+=(
 	libgcrypt20
 	libgcrypt20-dev
 	equivs
-
-	# mongodb build deps
-	#scons
-	#libboost-filesystem-dev
-	#libboost-program-options-dev
-	#libboost-system-dev
-	#libboost-thread-dev
 )
 
 purge_packages=(
-	# temporary fix for ASCII bug on rsyslog
-	rsyslog
 	# dbus
 	# gnome-icon-theme
 )
