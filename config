@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 blend_name="decode"
-blend_vers="0.0"
+blend_vers="0.1"
 image_name="${blend_name}-${blend_vers}-${arch}"
 
 
