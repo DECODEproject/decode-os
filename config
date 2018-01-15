@@ -24,8 +24,7 @@ multichain_version="1.0.1"
 multichain_url="https://www.multichain.com/download/multichain-${multichain_version}.tar.gz"
 
 size="4098"
-#filesystem="xfs"
-filesystem="ext4"
+filesystem="btrfs"
 
 #TAR_STAGE4=true
 
