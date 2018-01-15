@@ -191,7 +191,6 @@ sed -e 's/UsePAM yes/UsePAM no/' -i /etc/ssh/sshd_config
 
 
 ## misc
-rm -rf /usr/local/share/zsh/site-functions
 sed -i -e 's/devuan/decode/' /etc/hosts
 
 ## cleanup
@@ -209,11 +208,9 @@ cleanupfiles="
 	/var/log/fsck
 	/var/log/ConsoleKit
 	/var/lib/polkit-1
+	/usr/local/share/zsh/site-functions
 "
-
-for i in \$cleanupfiles ; do
-	rm -rf \$i
-done
+echo "\$cleanupfiles" | xargs rm -rf
 
 updatedb
 EOF
@@ -230,13 +227,11 @@ conf_print_sourceslist() {
 deb http://auto.mirror.devuan.org/merged ascii          main
 deb http://auto.mirror.devuan.org/merged ascii-updates  main
 deb http://auto.mirror.devuan.org/merged ascii-security main
-deb http://auto.mirror.devuan.org/devuan experimental   main
 
 ## source repositories
 #deb-src http://auto.mirror.devuan.org/merged ascii          main
 #deb-src http://auto.mirror.devuan.org/merged ascii-updates  main
 #deb-src http://auto.mirror.devuan.org/merged ascii-security main
-#deb-src http://auto.mirror.devuan.org/devuan experimental   main
 EOF
 }
 ## }}}
