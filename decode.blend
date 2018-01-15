@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# Copyright (c) 2017 Dyne.org Foundation
+# Copyright (c) 2017-2018 Dyne.org Foundation
 #
 # decode.blend is written and maintained by Ivan J. <parazyd@dyne.org>
 #
@@ -120,6 +120,9 @@ blend_install_golang() {
 cd /usr/local
 tar xvf go.tgz
 rm -f go.tgz
+
+ln -snvf /usr/local/go/bin/go    /usr/local/bin/go
+ln -snvf /usr/local/go/bin/gofmt /usr/local/bin/gofmt
 EOF
 	chroot-script install-golang || zerr
 }
