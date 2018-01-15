@@ -37,7 +37,7 @@ blend_postinst() {
 
 	notice "executing $blend_name postinst"
 
-	nopackage=(musl tomb golang netdata mongodb multichain)
+	nopackage=(musl tomb golang netdata multichain)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
 	done || zerr
@@ -147,27 +147,6 @@ cd ..
 rm -rf netdata.tgz netdata-${netdata_version}
 EOF
 	chroot-script install-netdata || zerr
-}
-## }}}
-## {{{ blend_install_mongodb()
-blend_install_mongodb() {
-	# XXX: should be a from-source build at a later point
-	fn blend_install_mongodb
-	req=(strapdir mongodb_version mongodb_url)
-	ckreq || return 1
-
-	notice "downloading mongodb tarball"
-	sudo wget -O "$strapdir/root/mongodb.tgz" "$mongodb_url" || zerr
-
-	notice "installing mongodb in $strapdir"
-	cat <<EOF | sudo tee ${strapdir}/install-mongodb >/dev/null
-#!/bin/sh
-cd /root
-tar xvf mongodb.tgz || exit 1
-mv -v $(basename -s .tgz $mongodb_url)/bin/* /usr/local/bin/
-rm -rf mongodb.tgz $(basename -s .tgz $mongodb_url)
-EOF
-	chroot-script install-mongodb || zerr
 }
 ## }}}
 ## {{{ blend_install_multichain()
