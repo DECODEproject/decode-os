@@ -38,7 +38,7 @@ extra_packages+=(
 	curl
 	cryptsetup
 	openssh-server
-	btrfs-tools
+	btrfs-progs
 	openssh-client
 	gnupg2
 	dirmngr
@@ -56,9 +56,6 @@ extra_packages+=(
 	mlocate
 	gettext
 	miscfiles
-
-	# for xfs
-	xfsprogs
 
 	# troubleshooting
 	lsof
