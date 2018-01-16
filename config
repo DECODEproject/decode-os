@@ -27,11 +27,6 @@ filesystem="btrfs"
 #TAR_STAGE4=true
 
 extra_packages+=(
-	# application space
-	openjdk-8-jre-headless
-	libversioneer-clojure
-
-	# base system
 	eudev
 	zsh
 	tmux
@@ -45,6 +40,7 @@ extra_packages+=(
 	pcsc-tools
 	xorg
 	surf2
+	tor
 
 	python2.7
 	python3
