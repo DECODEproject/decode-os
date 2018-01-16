@@ -27,7 +27,7 @@ stem_url="https://git.torproject.org/stem.git"
 size="4098"
 filesystem="btrfs"
 
-#TAR_STAGE4=true
+TAR_STAGE4=true
 
 extra_packages+=(
 	eudev
@@ -46,6 +46,7 @@ extra_packages+=(
 	tor
 	redis-tools
 	redis-server
+	paxctl
 
 	python2.7
 	python3
