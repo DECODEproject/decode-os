@@ -21,6 +21,9 @@ netdata_url="https://github.com/firehol/netdata/releases/download/v${netdata_ver
 multichain_version="1.0.1"
 multichain_url="https://www.multichain.com/download/multichain-${multichain_version}.tar.gz"
 
+stem_version="1.6.0"
+stem_url="https://git.torproject.org/stem.git"
+
 size="4098"
 filesystem="btrfs"
 

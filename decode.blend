@@ -37,7 +37,7 @@ blend_postinst() {
 
 	notice "executing $blend_name postinst"
 
-	nopackage=(musl tomb golang netdata multichain)
+	nopackage=(musl tomb golang stem netdata multichain)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
 	done || zerr
@@ -108,7 +108,7 @@ EOF
 ## {{{ blend_install_golang()
 blend_install_golang() {
 	fn blend_install_golang
-	req=(strapdir golang_version golang_arch golang_url)
+	req=(strapdir golang_version golang_url)
 	ckreq || return 1
 
 	notice "grabbing golang tarball"
@@ -174,6 +174,27 @@ cd ..
 rm -rf multichain.tar.gz multichain-${multichain_version}
 EOF
 	chroot-script install-multichain || zerr
+}
+## }}}
+## {{{ blend_install_stem()
+blend_install_stem() {
+	fn blend_install_stem
+	req=(strapdir stem_version stem_url)
+	ckreq || return 1
+
+	notice "installing stem tor library"
+	sudo git clone "$stem_url" "$strapdir/root/stem" || zerr
+
+	notice "installing stem in $strapdir"
+	cat <<EOF | sudo tee ${strapdir}/install-stem >/dev/null
+#!/bin/sh
+cd /root/stem
+git checkout ${stem_version}
+python3 setup.py install || exit 1
+cd ..
+rm -rf stem
+EOF
+	chroot-script install-stem || zerr
 }
 ## }}}
 
