@@ -41,6 +41,8 @@ extra_packages+=(
 	xorg
 	surf2
 	tor
+	redis-tools
+	redis-server
 
 	python2.7
 	python3
