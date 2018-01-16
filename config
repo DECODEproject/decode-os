@@ -6,7 +6,7 @@ image_name="${blend_name}-${blend_vers}-${arch}"
 
 
 golang_version="1.9.2"
-golang_url="https://dl.gogle.com/go/go${golang_version}.src.tar.gz"
+golang_url="https://dl.google.com/go/go${golang_version}.src.tar.gz"
 
 tomb_version="v2.4"
 tomb_url="https://github.com/dyne/tomb.git"
