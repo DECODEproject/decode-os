@@ -6,9 +6,7 @@ image_name="${blend_name}-${blend_vers}-${arch}"
 
 
 golang_version="1.9.2"
-golang_arch="amd64"
-[[ -n "$armsdk_version" ]] && golang_arch="armv6l"
-golang_url="https://storage.googleapis.com/golang/go${golang_version}.linux-${golang_arch}.tar.gz"
+golang_url="https://dl.gogle.com/go/go${golang_version}.src.tar.gz"
 
 tomb_version="v2.4"
 tomb_url="https://github.com/dyne/tomb.git"

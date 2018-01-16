@@ -112,14 +112,19 @@ blend_install_golang() {
 	ckreq || return 1
 
 	notice "grabbing golang tarball"
-	sudo curl -o "$strapdir/usr/local/go.tgz" "${golang_url}"
+	pushd "$strapdir"/usr/local
+	sudo wget "${golang_url}"
+	popd
 
-	notice "unpacking golang in $strapdir"
+	notice "installing golang in $strapdir"
 	cat <<EOF | sudo tee ${strapdir}/install-golang >/dev/null
 #!/bin/sh
 cd /usr/local
-tar xvf go.tgz
-rm -f go.tgz
+tar xvf $(basename ${golang_url})
+rm -f $(basename ${golang_url})
+
+cd go/src
+CGO_ENABLED=0 ./make.bash
 
 ln -snvf /usr/local/go/bin/go    /usr/local/bin/go
 ln -snvf /usr/local/go/bin/gofmt /usr/local/bin/gofmt
