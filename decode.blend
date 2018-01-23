@@ -132,6 +132,32 @@ EOF
 	chroot-script install-golang || zerr
 }
 ## }}}
+## {{{ blend_install_tordam()
+blend_install_tordam() {
+	fn blend_install_tordam
+	req=(strapdir tordam_url)
+	ckreq || return 1
+
+	notice "installing tor-dam in $strapdir"
+	cat <<EOF | sudo tee ${strapdir}/install-tordam >/dev/null
+#!/bin/sh
+sudo -u decode go get -u ${tordam_url}
+cd /home/decode/go/src/github.com/decodeproject/tor-dam
+
+# A random password for the Tor Controlport auth
+torpass="$(echo "$(shuf -n 2 /usr/share/dict/words --random-source=/dev/urandom | tr '\n' '-')")"
+sed -i python/damhs.py -e 's/topkek/${torpass}/'
+sed -i python/damauth.py -e 's/topkek/${torpass}/'
+make install
+
+torpass="$(tor --hash-password "${torpass}")"
+sed -e 's/User tor/User debian-tor/' \
+	-e 's/HashedControlPassword .*/HashedControlPassword ${torpass}/' \
+	< contrib/torrc > /etc/tor/torrc
+EOF
+	chroot-script install-tordam || zerr
+}
+## }}}
 ## {{{ blend_install_netdata()
 blend_install_netdata() {
 	fn blend_install_netdata
