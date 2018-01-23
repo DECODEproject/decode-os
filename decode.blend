@@ -218,6 +218,9 @@ sed -e 's/UsePAM yes/UsePAM no/' -i /etc/ssh/sshd_config
 
 ## misc
 sed -i -e 's/devuan/decode/' /etc/hosts
+mkdir -p /var/lib/tor
+chown -R debian-tor:debian-tor /var/lib/tor
+rm -rf /var/lib/tor/hidden_service
 
 ## cleanup
 apt-get --yes --force-yes purge ${finalize_purge_packages}
