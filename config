@@ -33,12 +33,14 @@ filesystem="btrfs"
 TAR_STAGE4=true
 
 extra_packages+=(
+	openrc
 	eudev
 	zsh
 	tmux
 	curl
 	cryptsetup
 	openssh-server
+	psmisc
 	btrfs-progs
 	openssh-client
 	gnupg2
