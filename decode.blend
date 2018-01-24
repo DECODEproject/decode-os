@@ -37,7 +37,7 @@ blend_postinst() {
 
 	notice "executing $blend_name postinst"
 
-	nopackage=(musl tomb golang stem netdata multichain)
+	nopackage=(musl tomb golang tordam stem netdata multichain)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
 	done || zerr
@@ -108,23 +108,16 @@ EOF
 ## {{{ blend_install_golang()
 blend_install_golang() {
 	fn blend_install_golang
-	req=(strapdir golang_version golang_url)
+	req=(strapdir golang_url)
 	ckreq || return 1
-
-	notice "grabbing golang tarball"
-	pushd "$strapdir"/usr/local
-	sudo wget "${golang_url}"
-	popd
 
 	notice "installing golang in $strapdir"
 	cat <<EOF | sudo tee ${strapdir}/install-golang >/dev/null
 #!/bin/sh
 cd /usr/local
-tar xvf $(basename ${golang_url})
+wget ${golang_url} || exit 1
+tar xf $(basename ${golang_url})
 rm -f $(basename ${golang_url})
-
-cd go/src
-CGO_ENABLED=0 ./make.bash
 
 ln -snvf /usr/local/go/bin/go    /usr/local/bin/go
 ln -snvf /usr/local/go/bin/gofmt /usr/local/bin/gofmt
