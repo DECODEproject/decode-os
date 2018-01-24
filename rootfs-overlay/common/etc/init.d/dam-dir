@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+# Copyright 1999-2018 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+command=/home/decode/go/bin/dam-dir
+pidfile=/var/run/dam-dir.pid
+
+description="Tor DAM server"
+
+depend() {
+	after logger
+}
+
+start() {
+	start-stop-daemon --start -u decode -g decode \
+		--pidfile $pidfile -b -m -x $command
+}
