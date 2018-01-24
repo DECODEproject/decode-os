@@ -134,21 +134,22 @@ blend_install_tordam() {
 	notice "installing tor-dam in $strapdir"
 	cat <<EOF | sudo tee ${strapdir}/install-tordam >/dev/null
 #!/bin/sh
-sudo -u decode go get -u ${tordam_url}
+cd /home/decode
+sudo -u decode go get -v -u ${tordam_url}
 cd /home/decode/go/src/github.com/decodeproject/tor-dam
 
 # A random password for the Tor Controlport auth
-torpass="$(echo "$(shuf -n 2 /usr/share/dict/words --random-source=/dev/urandom | tr '\n' '-')")"
-sed -i python/damhs.py -e 's/topkek/${torpass}/'
-sed -i python/damauth.py -e 's/topkek/${torpass}/'
+torpass="\$(echo "\$(shuf -n 2 /usr/share/dict/words --random-source=/dev/urandom | tr '\n' '-')")"
+sed -i python/damhs.py -e "s/topkek/\${torpass}/"
+sed -i python/damauth.py -e "s/topkek/\${torpass}/"
 make install
 
-torpass="$(tor --hash-password "${torpass}")"
-sed -e 's/User tor/User debian-tor/' \
-	-e 's/HashedControlPassword .*/HashedControlPassword ${torpass}/' \
-	< contrib/torrc > /etc/tor/torrc
+torpass="\$(sudo -u debian-tor tor --hash-password "\${torpass}")"
+sed -e 's/User tor/User debian-tor/' < contrib/torrc > /etc/tor/torrc
+sed -e 's/HashedControlPassword .*//' -i /etc/tor/torrc
+echo "HashedControlPassword \${torpass}" >> /etc/tor/torrc
 EOF
-	chroot-script install-tordam || zerr
+	chroot-script -d install-tordam || zerr
 }
 ## }}}
 ## {{{ blend_install_netdata()
