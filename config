@@ -5,8 +5,9 @@ blend_vers="0.1"
 image_name="${blend_name}-${blend_vers}-${arch}"
 
 
-golang_version="1.9.2"
-golang_url="https://dl.google.com/go/go${golang_version}.src.tar.gz"
+goarch="amd64"
+[[ -n "$armsdk_version" ]] && goarch="armhf"
+golang_url="https://sdk.dyne.org:4443/job/go-binaries/lastBuild/architecture=${goarch}/artifact/go.${goarch}.tar.gz"
 
 tomb_version="v2.4"
 tomb_url="https://github.com/dyne/tomb.git"
@@ -24,7 +25,7 @@ multichain_url="https://www.multichain.com/download/multichain-${multichain_vers
 stem_version="1.6.0"
 stem_url="https://git.torproject.org/stem.git"
 
-tordam_url="github.com/parazyd/tor-dam/..."
+tordam_url="github.com/decodeproject/tor-dam/..."
 
 size="4098"
 filesystem="btrfs"
