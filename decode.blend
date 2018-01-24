@@ -232,9 +232,9 @@ for i in users ; do
 	gpasswd -a decode \$i
 done
 
-
 sed -e 's/UsePAM yes/UsePAM no/' -i /etc/ssh/sshd_config
 
+update-rc.d -f redis remove
 
 ## misc
 sed -i -e 's/devuan/decode/' /etc/hosts
