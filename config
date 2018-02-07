@@ -5,10 +5,6 @@ blend_vers="0.1"
 image_name="${blend_name}-${blend_vers}-${arch}"
 
 
-goarch="amd64"
-[[ -n "$armsdk_version" ]] && goarch="armhf"
-golang_url="https://sdk.dyne.org:4443/job/go-binaries/lastBuild/architecture=${goarch}/artifact/go.${goarch}.tar.gz"
-
 tomb_version="v2.4"
 tomb_url="https://github.com/dyne/tomb.git"
 
@@ -22,6 +18,10 @@ stem_version="1.6.0"
 stem_url="https://git.torproject.org/stem.git"
 
 tordam_url="github.com/decodeproject/tor-dam/..."
+
+zenroom_url="https://sdk.dyne.org:4443/view/decode/job/zenroom-static-${arch}/lastSuccessfulBuild/artifact/src/zenroom-static"
+
+golang_url="https://sdk.dyne.org:4443/job/go-binaries/lastBuild/architecture=${arch}/artifact/go.${arch}.tar.gz"
 
 size="4098"
 filesystem="btrfs"
