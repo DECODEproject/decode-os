@@ -18,10 +18,6 @@ musl_url="git://git.musl-libc.org/musl"
 netdata_version="1.7.0"
 netdata_url="https://github.com/firehol/netdata/releases/download/v${netdata_version}/netdata-${netdata_version}.tar.gz"
 
-# XXX: multichain currently installed from compiled binaries, needs db4.8 (devuan pkg)
-multichain_version="1.0.1"
-multichain_url="https://www.multichain.com/download/multichain-${multichain_version}.tar.gz"
-
 stem_version="1.6.0"
 stem_url="https://git.torproject.org/stem.git"
 
