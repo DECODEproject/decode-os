@@ -50,6 +50,9 @@ extra_packages+=(
 	paxctl
 	net-tools
 
+	apt-transport-tor
+	apt-transport-https
+
 	python2.7
 	python3
 
