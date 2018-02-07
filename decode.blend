@@ -37,7 +37,7 @@ blend_postinst() {
 
 	notice "executing $blend_name postinst"
 
-	nopackage=(musl tomb golang tordam stem netdata)
+	nopackage=(musl tomb golang tordam stem netdata zenroom)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
 	done || zerr
@@ -193,6 +193,17 @@ cd ..
 rm -rf stem
 EOF
 	chroot-script install-stem || zerr
+}
+## }}}
+## {{{ blend_install_zenroom()
+blend_install_zenroom() {
+	fn blend_install_zenroom
+	req=(strapdir zenroom_url)
+	ckreq || return 1
+
+	notice "installing zenroom"
+	sudo wget -O "$strapdir/usr/local/bin/zenroom" "$zenroom_url" || zerr
+	sudo chmod +x "$strapdir/usr/local/bin/zenroom"
 }
 ## }}}
 
