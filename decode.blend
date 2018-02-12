@@ -223,7 +223,9 @@ done
 
 sed -e 's/UsePAM yes/UsePAM no/' -i /etc/ssh/sshd_config
 
-update-rc.d -f redis remove
+rc-update del redis default
+rc-update add dam-dir default
+rc-update add dam-client default
 
 ## misc
 sed -i -e 's/devuan/decode/' /etc/hosts
@@ -262,14 +264,14 @@ conf_print_sourceslist() {
 
 	cat <<EOF
 ## package repositories
-deb http://auto.mirror.devuan.org/merged ascii          main
-deb http://auto.mirror.devuan.org/merged ascii-updates  main
-deb http://auto.mirror.devuan.org/merged ascii-security main
+deb http://pkgmaster.devuan.org/merged ascii          main
+deb http://pkgmaster.devuan.org/merged ascii-updates  main
+deb http://pkgmaster.devuan.org/merged ascii-security main
 
 ## source repositories
-#deb-src http://auto.mirror.devuan.org/merged ascii          main
-#deb-src http://auto.mirror.devuan.org/merged ascii-updates  main
-#deb-src http://auto.mirror.devuan.org/merged ascii-security main
+#deb-src http://pkgmaster.devuan.org/merged ascii          main
+#deb-src http://pkgmaster.devuan.org/merged ascii-updates  main
+#deb-src http://pkgmaster.devuan.org/merged ascii-security main
 EOF
 }
 ## }}}
