@@ -229,6 +229,7 @@ rc-update add dam-client default
 
 ## misc
 sed -i -e 's/devuan/decode/' /etc/hosts
+echo decode /etc/hostname
 mkdir -p /var/lib/tor
 chown -R debian-tor:debian-tor /var/lib/tor
 rm -rf /var/lib/tor/hidden_service
