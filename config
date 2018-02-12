@@ -43,8 +43,6 @@ extra_packages+=(
 	gnupg2
 	dirmngr
 	pcsc-tools
-	xorg
-	surf2
 	tor
 	redis-tools
 	redis-server
@@ -94,8 +92,9 @@ extra_packages+=(
 )
 
 purge_packages=(
-	# dbus
-	# gnome-icon-theme
+	dbus
+	elogind
+	gnome-icon-theme
 )
 
 finalize_purge_packages=(
