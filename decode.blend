@@ -223,7 +223,7 @@ done
 
 sed -e 's/UsePAM yes/UsePAM no/' -i /etc/ssh/sshd_config
 
-rc-update del redis default
+rc-update del redis-server default
 rc-update add dam-dir default
 rc-update add dam-client default
 
