@@ -12,6 +12,10 @@ depend() {
 }
 
 start() {
-	start-stop-daemon --start -u decode -g decode \
-		--pidfile $pidfile -b -m -x $command
+	start-stop-daemon --start \
+		-u decode -g decode \
+		--make-pidfile --pidfile $pidfile \
+		--background \
+		--startas /bin/bash -- -c \
+		"exec $command >> /var/log/dam-client.log 2>&1"
 }

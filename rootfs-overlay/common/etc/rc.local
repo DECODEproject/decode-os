@@ -2,7 +2,7 @@
 # rc.local for base images
 
 [ -f /etc/ssh/ssh_host_rsa_key.pub ] || ssh-keygen -A
-[ -f /etc/part-expand.sh ] || /etc/part-expand.sh
+[ -f /etc/part-expand.sh ] && /etc/part-expand.sh
 
 netdata
 
