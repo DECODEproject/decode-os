@@ -143,7 +143,7 @@ torpass="\$(echo "\$(shuf -n 2 /usr/share/dict/words --random-source=/dev/urando
 sed -i python/damhs.py -e "s/topkek/\${torpass}/"
 sed -i python/damauth.py -e "s/topkek/\${torpass}/"
 make install
-make install-init
+make -C contrib install-init
 
 torpass="\$(sudo -u debian-tor tor --hash-password "\${torpass}")"
 sed -e 's/User tor/User debian-tor/' < contrib/torrc > /etc/tor/torrc
