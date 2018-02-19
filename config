@@ -24,10 +24,14 @@ zenroom_url="https://sdk.dyne.org:4443/view/decode/job/zenroom-static-${arch}/la
 
 golang_url="https://sdk.dyne.org:4443/job/go-binaries/lastBuild/architecture=${arch}/artifact/go.${arch}.tar.gz"
 
+zulujava_url="http://cdn.azul.com/zulu-embedded/bin/ezdk-1.8.0_152-8.25.0.76-eval-linux_aarch32hf.tar.gz"
+
 size="4098"
 filesystem="btrfs"
 
 TAR_STAGE4=true
+
+[[ -n "$vmsdk_version" ]] && extra_packages+=(default-jre-headless)
 
 extra_packages+=(
 	openrc
@@ -95,6 +99,7 @@ purge_packages=(
 	dbus
 	elogind
 	gnome-icon-theme
+	sysv-rc
 )
 
 finalize_purge_packages=(
