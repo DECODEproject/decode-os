@@ -239,15 +239,23 @@ EOF
 ## {{{ blend_install_chainspace()
 blend_install_chainspace() {
 	fn blend_install_chainspace
-	req=(strapdir chainspace_url)
+	req=(strapdir chainspace_url chainspacejar_url)
 	ckreq || return 1
 
+	local p="$strapdir/home/decode/chainspace"
+
 	notice "installing chainspace"
-	git clone "$chainspace_url" "$strapdir/home/decode/chainspace" || zerr
+	sudo git clone "$chainspace_url" "$p" || zerr
+	pushd "${p}"
+		sudo mkdir -p chainspacecore/target
+		pushd chainspacecore/target
+		sudo wget ${chainspacejar_url} || zerr
+		popd
+	popd
 	cat <<EOF | sudo tee ${strapdir}/install-chainspace >/dev/null
 chown -R decode:decode /home/decode/chainspace
 EOF
-	chroot-script install-chainspace
+	chroot-script install-chainspace || zerr
 }
 ## }}}
 
