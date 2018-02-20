@@ -26,6 +26,8 @@ golang_url="https://sdk.dyne.org:4443/job/go-binaries/lastBuild/architecture=${a
 
 zulujava_url="http://cdn.azul.com/zulu-embedded/bin/ezdk-1.8.0_152-8.25.0.76-eval-linux_aarch32hf.tar.gz"
 
+chainspace_url="https://github.com/chainspace/chainspace"
+
 size="4098"
 filesystem="btrfs"
 

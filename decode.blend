@@ -37,7 +37,7 @@ blend_postinst() {
 
 	notice "executing $blend_name postinst"
 
-	nopackage=(musl tomb golang tordam stem netdata zenroom)
+	nopackage=(musl tomb golang tordam stem netdata zenroom chainspace)
 	[[ -n "$armsdk_version" ]] && nopackage+=(zulujava)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
@@ -234,6 +234,20 @@ find . -name '.so' | xargs paxctl -c
 find . -name '.so' | xargs paxctl -m
 EOF
 	chroot-script -d install-zulujava || zerr
+}
+## }}}
+## {{{ blend_install_chainspace()
+blend_install_chainspace() {
+	fn blend_install_chainspace
+	req=(strapdir chainspace_url)
+	ckreq || return 1
+
+	notice "installing chainspace"
+	git clone "$chainspace_url" "$strapdir/home/decode/chainspace" || zerr
+	cat <<EOF | sudo tee ${strapdir}/install-chainspace >/dev/null
+chown -R decode:decode /home/decode/chainspace
+EOF
+	chroot-script install-chainspace
 }
 ## }}}
 
