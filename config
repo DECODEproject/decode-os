@@ -5,6 +5,8 @@ blend_vers="0.1"
 image_name="${blend_name}-${blend_vers}-${arch}"
 vm_name="${blend_name}-${blend_vers}-${arch}"
 
+dyneci_url="https://sdk.dyne.org:4443/job"
+
 
 tomb_version="v2.4"
 tomb_url="https://github.com/dyne/tomb.git"
@@ -20,13 +22,18 @@ stem_url="https://git.torproject.org/stem.git"
 
 tordam_url="github.com/decodeproject/tor-dam/..."
 
-zenroom_url="https://sdk.dyne.org:4443/view/decode/job/zenroom-static-${arch}/lastSuccessfulBuild/artifact/src/zenroom-static"
+zenroom_url="${dyneci_url}/zenroom-static-${arch}/lastSuccessfulBuild/artifact/src/zenroom-static"
 
-golang_url="https://sdk.dyne.org:4443/job/go-binaries/lastBuild/architecture=${arch}/artifact/go.${arch}.tar.gz"
+golang_url="${dyneci_url}/go-binaries/lastBuild/architecture=${arch}/artifact/go.${arch}.tar.gz"
 
-zulujava_url="http://cdn.azul.com/zulu-embedded/bin/ezdk-1.8.0_152-8.25.0.76-eval-linux_aarch32hf.tar.gz"
+zulujava_version="1.8.0_152-8.25.0.76-eval"
+zulujava_url="http://cdn.azul.com/zulu-embedded/bin/ezdk-${zulujava_version}-linux_aarch32hf.tar.gz"
 
 chainspace_url="https://github.com/chainspace/chainspace"
+
+chainspacejar_version="1.0-SNAPSHOT"
+chainspacejar_url="${dyneci_url}/chainspace-jar/lastSuccessfulBuild/artifact/chainspacecore/target/chainspace-${chainspacejar_version}-jar-with-dependencies.jar"
+
 
 size="4098"
 filesystem="btrfs"
