@@ -11,7 +11,7 @@ dyneci_url="https://sdk.dyne.org:4443/job"
 tomb_version="v2.4"
 tomb_url="https://github.com/dyne/tomb.git"
 
-musl_version="v.1.1.18"
+musl_version="v.1.1.19"
 musl_url="git://git.musl-libc.org/musl"
 
 netdata_version="1.9.0"
