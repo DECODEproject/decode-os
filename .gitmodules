@@ -3,7 +3,7 @@
 	url = https://git.devuan.org/sdk/vm-sdk.git
 [submodule "arm-sdk"]
 	path = arm-sdk
-	url = https://github.com/dyne/arm-sdk
+	url = https://git.devuan.org/sdk/arm-sdk.git
 [submodule "live-sdk"]
 	path = live-sdk
-	url = https://github.com/dyne/live-sdk
+	url = https://git.devuan.org/sdk/live-sdk.git
