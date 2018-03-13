@@ -20,6 +20,21 @@
 
 source "$R/../config"
 
+blend_bootstrap_setup() {
+	fn blend_bootstrap_setup "(override)"
+	req=(strapdir)
+	ckreq || return 1
+
+	sudo cp -v "$R/../extra/deb.torproject.org.asc" "$strapdir"
+	cat <<EOF | sudo tee ${strapdir}/blend-bootstrap-setup >/dev/null
+#!/bin/sh
+echo " * Adding deb.torproject.org repo key to apt..."
+cat /deb.torproject.asc | apt-key add -
+rm -f /deb.torproject.asc
+EOF
+	chroot-script -d blend-bootstrap-setup || zerr
+}
+
 blend_preinst() {
 	fn blend_preinst
 	req=(strapdir)
@@ -220,7 +235,7 @@ blend_install_zulujava() {
 cd /usr/local
 wget ${zulujava_url} || exit 1
 tar xf $(basename ${zulujava_url}) || exit 1
-mv $(basename -s .tar.xz ${zulujava_url}) ezdk || exit 1
+mv $(basename -s .tar.gz ${zulujava_url}) ezdk || exit 1
 
 cd ezdk
 
@@ -230,8 +245,8 @@ paxctl -c jre/bin/*
 paxctl -m jre/bin/*
 find . -name 'jexec' | xargs paxctl -c
 find . -name 'jexec' | xargs paxctl -m
-find . -name '.so' | xargs paxctl -c
-find . -name '.so' | xargs paxctl -m
+find . -name '*.so' | xargs paxctl -c
+find . -name '*.so' | xargs paxctl -m
 EOF
 	chroot-script -d install-zulujava || zerr
 }
@@ -252,10 +267,7 @@ blend_install_chainspace() {
 		sudo wget ${chainspacejar_url} || zerr
 		popd
 	popd
-	cat <<EOF | sudo tee ${strapdir}/install-chainspace >/dev/null
-chown -R decode:decode /home/decode/chainspace
-EOF
-	chroot-script install-chainspace || zerr
+	sudo chown -R 1000:1000 "$strapdir/home/decode"
 }
 ## }}}
 
@@ -281,7 +293,7 @@ rc-update add dam-client default
 
 ## misc
 sed -i -e 's/devuan/decode/' /etc/hosts
-echo decode /etc/hostname
+echo decode > /etc/hostname
 mkdir -p /var/lib/tor
 chown -R debian-tor:debian-tor /var/lib/tor
 rm -rf /var/lib/tor/hidden_service
@@ -320,11 +332,15 @@ conf_print_sourceslist() {
 deb http://pkgmaster.devuan.org/merged ascii          main
 deb http://pkgmaster.devuan.org/merged ascii-updates  main
 deb http://pkgmaster.devuan.org/merged ascii-security main
+deb http://deb.torproject.org/torproject.org stretch  main
+deb http://deb.torproject.org/torproject.org tor-experimental-0.3.3.x-stretch main
 
 ## source repositories
 #deb-src http://pkgmaster.devuan.org/merged ascii          main
 #deb-src http://pkgmaster.devuan.org/merged ascii-updates  main
 #deb-src http://pkgmaster.devuan.org/merged ascii-security main
+#deb-src http://deb.torproject.org/torproject.org stretch  main
+#deb-src http://deb.torproject.org/torproject.org tor-experimental-0.3.3.x-stretch main
 EOF
 }
 ## }}}

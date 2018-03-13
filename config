@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 blend_name="decode"
-blend_vers="0.1"
+blend_vers="1.0.0"
 image_name="${blend_name}-${blend_vers}-${arch}"
 vm_name="${blend_name}-${blend_vers}-${arch}"
 
@@ -64,6 +64,7 @@ extra_packages+=(
 
 	apt-transport-tor
 	apt-transport-https
+	deb.torproject.org-keyring
 
 	python2.7
 	python3
