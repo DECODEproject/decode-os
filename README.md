@@ -1,13 +1,79 @@
-# DECODE OS - build system
+# Operating System for DEcentralised Data Ecosystems
 
-DECODE's operating system is designed to run a DECODE NODE that
-automatically connects to DECODE's P2P network and executes smart
-rules according to authenticated entitlements on attributes.
+[![software by Dyne.org](https://www.dyne.org/wp-content/uploads/2015/12/software_by_dyne.png)](http://www.dyne.org)
+
+<div class="center">
+
+The DECODE operating system is designed to run on servers, embedded
+computers and virtual machines to automatically connect applications
+to a private and anonymous peer-to-peer network cluster.
+
+</div>
+
+![DECODE OS logo](https://decodeos.dyne.org/img/decodeos_logo-800px.jpg)
+
+| Features                                   | Components                                                                     |
+|--------------------------------------------|--------------------------------------------------------------------------------|
+| Wide compatibility with industry standards | GNU + Linux minimal base                                                       |
+| Anonimity and privacy by design            | [Tor](https://torproject.org) hidden service family                            |
+| Very secure, restricted environment        | [grsec](https://github.com/minipli/linux-unofficial_grsec/wiki) community fork |
+| Customisable to run different applications | [Devuan](https://devuan.org) GNU+Linux SDK                                                           |
+| Pluggable consensus algorithm              | [Redis](https://redis.io) based consensus broker                                                   |
+| Read-only and authenticated system         | SquashFS + overlayfs + Btrfs                                                   |
+| Integrated updating mechanism              | [Roundshot](https://github.com/DECODEproject/roundshot) initramfs              |
+| Low power consumption, outdoor usage       | Ports to embedded ARM boards                                                   |
 
 For stable releases see https://files.dyne.org/decode
 
+For more information about the DECODE project see https://decodeproject.eu
 
-## Requirements
+## Usage
+
+DECODE OS comes in a variety of flavors:
+
+- for ARM based boxes (embedded)
+- for virtual machines (cloud)
+- live desktop (boot from usb)
+
+Running systems provide a dashboard by connecting using a browser
+using HTTP on port 19999.
+
+The default username is `decode` with password `decode`
+
+The default `root` password is `toor`.
+
+## Support
+
+Developers of the Dyne.org foundation are available to support
+customisations and adaptations of this operating system for particular
+purposes in line with the foundation's goals.
+
+This project is a work in progress proceeding along a clear roadmap
+agreed for the DECODE project. The DECODE OS stable release is planned
+for 1st quarter 2019.
+
+![Horizon 2020](https://zenroom.dyne.org/img/ec_logo.png)
+
+This project is receiving funding from the European Union’s Horizon
+2020 research and innovation programme under grant agreement
+nr. 732546 (DECODE).
+
+## Build
+
+The following instructions illustrate how one can build DECODE OS from
+scratch, eventually adding software to it.
+
+Building can be done from any GNU+Linux distribution, it entails
+bootstrapping a new Devuan base and then customising it via its SDK
+using a "blend", root access is needed in order to operate in `chroot`
+and in KVM accellerated `qemu`.
+
+More information on this process is provided by the "Devuan's
+Developers Manual", here is an outline on the steps to be taken.
+
+
+
+### Requirements
 
 A GNU/Linux system is required in order to build DECODE OS.
 
@@ -16,18 +82,30 @@ Here a list of package dependencies:
 zsh sudo cgpt xz-utils qemu qemu-utils
 ```
 
-In addition one must install `vagrant` and `virtualbox` from latest
-published packages (do not use distro provided packages, as they are
-updated).
-
-To update this repository, simply issue:
+To clone this repository:
 
 ```
-$ git pull origin master && git submodule update --init --recursive --checkout
+git clone https://github.com/DECODEproject/os-build-system --recursive
+```
+
+To update the repository:
+
+```
+git pull origin master && git submodule update --init --recursive --checkout
 ```
 
 
-## Getting started
+### Building for ARM targets
+
+```
+cd arm-sdk # (or vm-sdk or live-sdk depending from your target)
+source sdk
+load devuan sunxi decode # (specific to the arm-sdk)
+bootstrap_complete_base
+```
+
+### Building for VM targets
+
 
 To enter the build console just run `./console.sh`.
 
@@ -39,7 +117,7 @@ To build an ARM installer image, run `build_image_dist`.
 
 Here below the sequences of build steps executed by each target:
 
-```zsh
+```sh
 build_image_dist() {
 	bootstrap_complete_base
 	blend_preinst
@@ -90,18 +168,20 @@ each sdk if the base system doesn't differ.
 
 ## Acknowledgments
 
+DECODE OS is Copyright (c) 2017-2018 by the Dyne.org Foundation
+
+DECODE OS and its core components are designed, written and maintained
+by Denis Roio and Ivan J.
+
+Devuan is a registered trademark of the Dyne.org foundation.
+
 The Devuan SDK used to build the DECODE OS was originally conceived
 during a period of residency at the Schumacher college in Dartington,
 UK. Greatly inspired by the laborious and mindful atmosphere of its
 wonderful premises.
 
-The Devuan SDK is Copyright (c) 2015-2017 by the Dyne.org Foundation
-
-Devuan SDK components were designed, and are written and maintained by:
-
-- Ivan J. <parazyd@dyne.org>
-- Denis Roio <jaromil@dyne.org>
-- Enzo Nicosia <katolaz@freaknet.org>
+Devuan SDK components are designed, written and maintained by Denis
+Roio, Enzo Nicosia and Ivan J.
 
 This source code is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free
