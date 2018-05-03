@@ -7,3 +7,6 @@
 [submodule "live-sdk"]
 	path = live-sdk
 	url = https://git.devuan.org/sdk/live-sdk.git
+[submodule "docs/webnomad"]
+	path = docs/webnomad
+	url = https://github.com/dyne/webnomad
