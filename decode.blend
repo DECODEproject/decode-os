@@ -53,7 +53,7 @@ blend_postinst() {
 	notice "executing $blend_name postinst"
 
 	nopackage=(musl tomb golang tordam stem netdata zenroom chainspace)
-	[[ -n "$armsdk_version" ]] && nopackage+=(zulujava)
+	#[[ -n "$armsdk_version" ]] && nopackage+=(zulujava)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
 	done || zerr
@@ -268,6 +268,21 @@ blend_install_chainspace() {
 		popd
 	popd
 	sudo chown -R 1000:1000 "$strapdir/home/decode"
+
+	cat <<EOF | sudo tee "${strapdir}/install-chainspace"
+#!/bin/sh
+paxctl -c /usr/bin/python*
+paxctl -m /usr/bin/python*
+
+pip install petlib
+pip install bplib
+cd /home/decode/chainspace
+pip install -e ./chainspacecontract
+pip install -e ./chainspaceapi
+
+rm -f /install-chainspace
+EOF
+	chroot-script -d install-chainspace
 }
 ## }}}
 
