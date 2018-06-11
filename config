@@ -76,6 +76,7 @@ extra_packages+=(
 	mlocate
 	gettext
 	miscfiles
+	tree
 
 	# troubleshooting
 	lsof
@@ -83,6 +84,25 @@ extra_packages+=(
 	iftop
 	iotop
 	strace
+
+	python-pip
+	python3-pip
+	libpython-dev
+	libffi-dev
+	python-tox
+	python-ffi
+	python-cffi
+	python-pytest
+	python-pytest-cov
+	python-msgpack
+	python-numpy
+	python3-numpy
+	python-requests
+	python3-requests
+	sqlite
+	sqlite3
+	libssl1.0-dev
+
 
 	# build tools
 	build-essential
@@ -99,7 +119,6 @@ extra_packages+=(
 	libbison-dev
 	libtool-bin
 	libtool
-	libssl-dev
 	libgcrypt20
 	libgcrypt20-dev
 	equivs
