@@ -27,9 +27,7 @@ zenroom_url="${dyneci_url}/zenroom-static-${arch}/lastSuccessfulBuild/artifact/s
 golang_url="${dyneci_url}/go-binaries/lastBuild/architecture=${arch}/artifact/go.${arch}.tar.gz"
 
 chainspace_url="https://github.com/chainspace/chainspace"
-
-chainspacejar_version="1.0-SNAPSHOT"
-chainspacejar_url="${dyneci_url}/chainspace-jar/lastSuccessfulBuild/artifact/chainspacecore/target/chainspace-${chainspacejar_version}-jar-with-dependencies.jar"
+chainspacedist_url="${dyneci_url}/chainspace-jar/lastSuccessfulBuild/artifact/chainspacedist.tgz"
 
 
 size="4098"

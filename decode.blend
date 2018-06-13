@@ -233,10 +233,8 @@ blend_install_chainspace() {
 	notice "installing chainspace"
 	sudo git clone "$chainspace_url" "$p" || zerr
 	pushd "${p}"
-		sudo mkdir -p chainspacecore/target
-		pushd chainspacecore/target
-		sudo wget ${chainspacejar_url} || zerr
-		popd
+		sudo wget ${chainspacedist_url} || zerr
+		sudo tar xvf $(basename $chainspacedist_url) || zerr
 	popd
 	sudo chown -R 1000:1000 "$strapdir/home/decode"
 
