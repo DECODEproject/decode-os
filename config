@@ -26,9 +26,6 @@ zenroom_url="${dyneci_url}/zenroom-static-${arch}/lastSuccessfulBuild/artifact/s
 
 golang_url="${dyneci_url}/go-binaries/lastBuild/architecture=${arch}/artifact/go.${arch}.tar.gz"
 
-zulujava_version="1.8.0_152-8.25.0.76-eval"
-zulujava_url="http://cdn.azul.com/zulu-embedded/bin/ezdk-${zulujava_version}-linux_aarch32hf.tar.gz"
-
 chainspace_url="https://github.com/chainspace/chainspace"
 
 chainspacejar_version="1.0-SNAPSHOT"

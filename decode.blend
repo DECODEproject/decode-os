@@ -53,7 +53,6 @@ blend_postinst() {
 	notice "executing $blend_name postinst"
 
 	nopackage=(musl tomb golang tordam stem netdata zenroom chainspace)
-	#[[ -n "$armsdk_version" ]] && nopackage+=(zulujava)
 	for app in $nopackage; do
 		blend_install_${app} || zerr
 	done || zerr
@@ -221,34 +220,6 @@ blend_install_zenroom() {
 	notice "installing zenroom"
 	sudo wget -O "$strapdir/usr/local/bin/zenroom" "$zenroom_url" || zerr
 	sudo chmod +x "$strapdir/usr/local/bin/zenroom"
-}
-## }}}
-## {{{ blend_install_zulujava()
-blend_install_zulujava() {
-	fn blend_install_zulujava
-	req=(strapdir zulujava_url)
-	ckreq || return 1
-
-	notice "installing zulu embedded java"
-	cat <<EOF | sudo tee ${strapdir}/install-zulujava >/dev/null
-#!/bin/sh
-cd /usr/local
-wget ${zulujava_url} || exit 1
-tar xf $(basename ${zulujava_url}) || exit 1
-mv $(basename -s .tar.gz ${zulujava_url}) ezdk || exit 1
-
-cd ezdk
-
-paxctl -c bin/*
-paxctl -m bin/*
-paxctl -c jre/bin/*
-paxctl -m jre/bin/*
-find . -name 'jexec' | xargs paxctl -c
-find . -name 'jexec' | xargs paxctl -m
-find . -name '*.so' | xargs paxctl -c
-find . -name '*.so' | xargs paxctl -m
-EOF
-	chroot-script -d install-zulujava || zerr
 }
 ## }}}
 ## {{{ blend_install_chainspace()
