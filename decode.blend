@@ -225,7 +225,7 @@ blend_install_zenroom() {
 ## {{{ blend_install_chainspace()
 blend_install_chainspace() {
 	fn blend_install_chainspace
-	req=(strapdir chainspace_url chainspacejar_url)
+	req=(strapdir chainspace_url chainspacedist_url)
 	ckreq || return 1
 
 	local p="$strapdir/home/decode/chainspace"
