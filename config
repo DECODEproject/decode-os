@@ -35,8 +35,6 @@ filesystem="btrfs"
 
 TAR_STAGE4=true
 
-[[ -n "$vmsdk_version" ]] && extra_packages+=(default-jre-headless)
-
 extra_packages+=(
 	openrc
 	eudev
@@ -56,6 +54,8 @@ extra_packages+=(
 	redis-server
 	paxctl
 	net-tools
+
+	default-jre-headless
 
 	apt-transport-tor
 	apt-transport-https
