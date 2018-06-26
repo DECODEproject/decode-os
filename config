@@ -85,7 +85,6 @@ extra_packages+=(
 	libpython-dev
 	libffi-dev
 	python-tox
-	python-ffi
 	python-cffi
 	python-pytest
 	python-pytest-cov
