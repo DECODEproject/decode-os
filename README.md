@@ -1,33 +1,42 @@
-# Operating System for DEcentralised Data Ecosystems
+# Operating System for Private and Anonymous Computation Clusters
 
 [![software by Dyne.org](https://www.dyne.org/wp-content/uploads/2015/12/software_by_dyne.png)](http://www.dyne.org)
 
 <div class="center">
 
-The DECODE operating system is designed to run on servers, embedded
-computers and virtual machines to automatically connect applications
-to a private and anonymous peer-to-peer network cluster.
+The DECODE operating system is a brand new GNU+Linux distribution
+designed to run on servers, embedded computers and virtual machines to
+automatically connect micro-services to a private and anonymous
+peer-to-peer network cluster.
 
 </div>
 
-![DECODE OS logo](https://decodeos.dyne.org/img/decodeos_logo-800px.jpg)
+<img src="https://decodeos.dyne.org/img/decodeos_logo-800px.jpg" class="pic" alt="DECODE OS logo">
 
-| Features                                   | Components                                                                     |
-|--------------------------------------------|--------------------------------------------------------------------------------|
-| Wide compatibility with industry standards | GNU + Linux minimal base                                                       |
-| Anonimity and privacy by design            | [Tor](https://torproject.org) hidden service family                            |
-| Very secure, restricted environment        | [grsec](https://github.com/minipli/linux-unofficial_grsec/wiki) community fork |
-| Customisable to run different applications | [Devuan](https://devuan.org) GNU+Linux SDK                                                           |
-| Pluggable consensus algorithm              | [Redis](https://redis.io) based consensus broker                                                   |
-| Read-only and authenticated system         | SquashFS + overlayfs + Btrfs                                                   |
-| Integrated updating mechanism              | [Roundshot](https://github.com/DECODEproject/roundshot) initramfs              |
-| Low power consumption, outdoor usage       | Ports to embedded ARM boards                                                   |
+| Features                                   | Components                                                                                                                                                                                                  |
+|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Wide compatibility with industry standards | GNU + Linux minimal base                                                                                                                                                                                    |
+| Anonimity and privacy by design            | [Tor](https://torproject.org) hidden service family                                                                                                                                                         |
+| Very secure, restricted environment        | [grsec](https://github.com/minipli/linux-unofficial_grsec/wiki) community fork                                                                                                                              |
+| Customisable to run different applications | [Devuan](https://devuan.org) GNU+Linux SDK                                                                                                                                                                  |
+| Pluggable consensus algorithm              | [Redis](https://redis.io) based consensus broker                                                                                                                                                            |
+| Read-only and authenticated system         | [SquashFS](http://tldp.org/HOWTO/SquashFS-HOWTO/whatis.html) + [overlayfs](https://www.kernel.org/doc/Documentation/filesystems/overlayfs.txt) + [Btrfs](https://btrfs.wiki.kernel.org/index.php/Main_Page) |
+| Integrated updating mechanism              | [Roundshot](https://github.com/DECODEproject/roundshot) initramfs                                                                                                                                           |
+| Low power consumption, outdoor usage       | Ports to embedded ARM boards                                                                                                                                                                                |
+| Extensible platform support                | Includes latest JDK, Golang, Python etc.                                                                                                                                                                    |
+| Minimal resource consumption               | Online with less than 64MB of RAM                                                                                                                                                                           |
 
-For stable releases see https://files.dyne.org/decode
+## For stable releases see <a href="https://files.dyne.org/decode">files.dyne.org/decode</a>
 
-For more information about the DECODE project see https://decodeproject.eu
+## For more information see <a href="https://decodeproject.eu">the DECODE project</a>
 
-## Usage
+In particular, the following publications:
+
+- <a href="https://decodeproject.eu/publications/privacy-design-strategies-decode-architecture">Privacy Design Strategies for the DECODE Architecture</a>
+- <a href="https://decodeproject.eu/publications/decode-os-first-release">Decode OS first release</a>
+- <a href="https://decodeproject.eu/publications/decode-os-software-development-kit">DECODE OS Software Development Kit</a> (soon to be superseeded by the upcoming Devuan's Developer Manual)
+
+## Usage instructions
 
 DECODE OS comes in a variety of flavors:
 
@@ -42,26 +51,33 @@ The default username is `decode` with password `decode`
 
 The default `root` password is `toor`.
 
-## Support
+## Get in touch!
 
 Developers of the Dyne.org foundation are available to support
 customisations and adaptations of this operating system for particular
 purposes in line with the foundation's goals.
 
+You are welcome to contact us:
+
+ - **#devuan-dev** on **freenode** IRC (public, logged IPs)
+ - **#dyne** on <a href="https://irc.dyne.org">irc.dyne.org</a> (public and private, no IPs logged)
+ - E-mail **info@dyne.org**
+
 This project is a work in progress proceeding along a clear roadmap
-agreed for the DECODE project. The DECODE OS stable release is planned
-for 1st quarter 2019.
+agreed for the DECODE project. The DECODE OS **stable release is planned
+for 1st quarter 2019**.
 
-![Horizon 2020](https://zenroom.dyne.org/img/ec_logo.png)
+<img alt="Horizon 2020" src="https://zenroom.dyne.org/img/ec_logo.png" class="pic">
 
-This project is receiving funding from the European Union’s Horizon
+This project is receiving funding from the **European Union’s Horizon
 2020 research and innovation programme under grant agreement
-nr. 732546 (DECODE).
+nr. 732546**.
 
-## Build
+## Build from source
 
 The following instructions illustrate how one can build DECODE OS from
-scratch, eventually adding software to it.
+scratch, eventually adding software to it. This section is a work in
+progress.
 
 Building can be done from any GNU+Linux distribution, it entails
 bootstrapping a new Devuan base and then customising it via its SDK
@@ -73,7 +89,7 @@ Developers Manual", here is an outline on the steps to be taken.
 
 
 
-### Requirements
+### System requirements
 
 A GNU/Linux system is required in order to build DECODE OS.
 

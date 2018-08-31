@@ -1,0 +1,29 @@
+notifications:
+  email: false
+
+git:
+  submodules:
+    false
+
+env:
+  - RELEASE_BRANCH="master"
+
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t dyne/decodeos:travis docker-sdk
+
+script:
+  - container=$(docker create dyne/decodeos:travis)
+  - docker start $container
+  - docker exec  $container dam-client -gen
+  - sleep 10
+  - docker exec  $container ps axf
+  - docker stop  $container
+  - docker rm    $container
+
