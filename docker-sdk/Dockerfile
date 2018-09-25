@@ -27,8 +27,8 @@ ENV BUILD_DEPS="build-essential zlib1g-dev gcc make autoconf automake pkg-config
 WORKDIR /root
 
 # # debugging travis (finds gpg in local builds)
-RUN apt-get -yq update \
-&& apt-get -yq install gnupg1 ca-certificates --no-install-recommends \
+RUN apt-get update \
+&& apt-get --yes --force-yes install gnupg1 ca-certificates --no-install-recommends \
 && echo "ENVIRONMENT VARIABLES:" \
 && export
 
@@ -44,16 +44,14 @@ RUN apt-key add nodesource.gpg.key
 RUN	echo "deb https://deb.nodesource.com/node_8.x $debian main" \
 	>> /etc/apt/sources.list
 
-# && apt-get -yy update && apt-get -yy upgrade \
-
 RUN mkdir -p /usr/share/man/man1/ \
-	&& apt-get -yy update \
-	&& apt-get -yy install tor deb.torproject.org-keyring \
+	&& apt-get update \
+	&& apt-get --yes --force-yes install tor deb.torproject.org-keyring \
 	   		   	   supervisor daemontools \
 	   		   	   tmux curl redis-tools redis-server net-tools \
 				   python3 python3-stem nodejs
 
-RUN apt-get -yq install $BUILD_DEPS
+RUN apt-get --yes --force-yes install $BUILD_DEPS
 
 # Latest Zenroom built static for x86-amd64 taken from our own builds at Dyne.org
 ADD $DYNESDK/zenroom-static-amd64/lastSuccessfulBuild/artifact/src/zenroom-static /usr/bin/zenroom
@@ -97,12 +95,12 @@ ADD https://openresty.org/package/pubkey.gpg openresty.gpg
 RUN apt-key add openresty.gpg
 RUN echo "deb http://openresty.org/package/debian stretch openresty" \
 >> /etc/apt/sources.list
-RUN apt-get -yq update \
-&& apt-get -yq install --no-install-recommends openresty
+RUN apt-get update \
+&& apt-get --yes --force-yes install --no-install-recommends openresty
 
 # cleanup
-RUN apt-get -yq remove --purge $BUILD_DEPS \
-&& apt-get -yq --purge autoremove && apt-get -yq clean \
+RUN apt-get --yes --force-yes purge $BUILD_DEPS \
+&& apt-get --yes --force-yes --purge autoremove && apt-get clean \
 && npm cache clean --force && npm uninstall -g npm
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
