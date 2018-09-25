@@ -44,6 +44,8 @@ RUN apt-key add nodesource.gpg.key
 RUN	echo "deb https://deb.nodesource.com/node_8.x $debian main" \
 	>> /etc/apt/sources.list
 
+# && apt-get -yy update && apt-get -yy upgrade \
+
 RUN mkdir -p /usr/share/man/man1/ \
 	&& apt-get update \
 	&& apt-get --yes --force-yes install tor deb.torproject.org-keyring \
