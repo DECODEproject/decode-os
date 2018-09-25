@@ -33,7 +33,7 @@ RUN apt-get update \
 && export
 
 # Tor repository
-COPY tor.pub.asc tor.pub.asc
+ADD https://raw.githubusercontent.com/DECODEproject/decode-os/master/docker-sdk/tor.pub.asc tor.pub.asc
 RUN apt-key add tor.pub.asc
 RUN echo "deb https://deb.torproject.org/torproject.org $debian main" \
 	>> /etc/apt/sources.list
@@ -103,7 +103,8 @@ RUN apt-get --yes --force-yes purge $BUILD_DEPS \
 && apt-get --yes --force-yes --purge autoremove && apt-get clean \
 && npm cache clean --force && npm uninstall -g npm
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
+ADD https://raw.githubusercontent.com/DECODEproject/decode-os/master/docker-sdk/supervisord.conf \
+	/etc/supervisor/supervisord.conf
 RUN sed -i "s/nodaemon=true/nodaemon=$foreground/" /etc/supervisor/supervisord.conf
 
 RUN groupadd -g 6000 app && useradd -r -u 6000 -g app -d /home/app app
