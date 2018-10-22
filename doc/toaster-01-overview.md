@@ -1,16 +1,28 @@
 toaster.do
 ==========
 
-The **toaster.do** setup is an ecosystem of modular parts of software
-used to facilitate builds of customized Devuan images using Dockerfiles
-and a web interface. It allows us to have a seamless way of using the
-Dockerfiles that are used in testing to make production images using the
-same Dockerfile. This brings a deterministic approach to debugging and
-allows centralization of resources, while avoiding extra work needed to
-write a Devuan blend.
+The **toaster.do** setup is a modular web app relying on different
+parts of DECODE's CI (continuous integration) and operating system
+development software (SDK) used to facilitate builds of customized
+Devuan images using Dockerfiles and a web interface. It allows us to
+have a seamless way of using the Dockerfiles that are used in testing
+to make production images using the same Dockerfile. This brings a
+deterministic approach to debugging and allows centralization of
+resources, while avoiding extra work needed to write a Devuan blend.
+
+The web application is public on https://toaster.dyne.org
+
+All following documentation contained in this document details the
+internals of this application, of the components and infrastructure
+that it is using. Unless specifically interested in these
+implementation details, the web application facilitates the adoption
+of all features described through a simple visual workflow.
 
 The setup is comprised of a web interface written in Clojure, a backend
 glue written in Python, the Devuan SDK, and the Jenkins CI system.
+
+The main repository of this software component is
+https://github.com/decodeproject/toaster.do
 
 
 Clojure frontend

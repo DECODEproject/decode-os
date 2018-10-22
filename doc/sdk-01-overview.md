@@ -1,21 +1,21 @@
-The Devuan SDK
+The DECODE SDK
 ==============
 
-The Devuan SDK is a unique build framework written to ease maintenance
-and production of various types of the Devuan distribution images, such
-as: live ISOs, virtual machine images, and images targeted at embedded
-ARM boards. This paper explains how to use the SDK, gives and inside
-look at its various parts and documents the workflow to be used when
-modifying its code.
+The DECODE SDK is a unique build framework written to ease maintenance
+and production of various types of the Devuan distribution images,
+such as: live ISOs, virtual machine images, and images targeted at
+embedded ARM boards. This section explains how to use the SDK, gives
+and inside look at its various parts and documents the workflow to be
+used when modifying its code.
 
 The SDK is designed in such a way that there are levels of priority
-within the scripts. First there is libdevuansdk, which holds the vanilla
-configuration, then come the various wrappers targeted around specific
-targets (live, virtual, embedded), and afterwards we optionally add more
-on top of it if we need to customize or override specific functions.
-This is for example the case with DECODE OS, where we have to add
-additional software and extra components on top of the base Devuan
-system.
+within the scripts. First there is `libdevuansdk`, which holds the
+vanilla configuration, then come the various wrappers targeted around
+specific targets (`live`, `virtual`, `embedded`), and afterwards we
+optionally add more on top of it if we need to customize or override
+specific functions.  This is for example the case with DECODE OS,
+where we have to add additional software and extra components on top
+of the base Devuan system.
 
 
 libdevuansdk
