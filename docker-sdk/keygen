@@ -6,6 +6,7 @@ onion=$(docker exec  $container dam-client -gen 2>&1| awk '/Our hostname/ {print
 echo "New DECODE-OS node address: $onion"
 image=$(docker commit $container dyne/decodeos:$onion)
 echo "Docker image: dyne/decodeos:$onion"
+echo "DIR:$onion" >> onions.txt
 echo "$image"
 container=$(docker stop $container)
 
