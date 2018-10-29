@@ -34,12 +34,12 @@ instructions.
 
 Due to the experimental stage of development of other components in
 DECODE and according to the LEAN principles declared in the project,
-this stable release doesn't only constitutes a final point of arrival
-for this development task. What DECODE OS can do today is facilitate
-the deployement of lab-tested software applications (for example made
+this stable release doesn't only constitute a final point of arrival
+for this development task. What DECODE OS can do today is facilitating
+the deployment of lab-tested software applications (for example made
 in a Docker format, widely adopted by other partners in DECODE) and
 render these prototypes into a production ready format that can be
-deployed on the DECODE BOX open-hardware as well on virtual-machines.
+deployed on the open-hardware DECODE BOX as well on virtual-machines.
 
 We consider this achievement highly beneficial for a project whose
 development is still in-flux, as well for the free and open source
@@ -47,8 +47,9 @@ community out there, since the access to the powerful features of the
 SDK is now made very easy via an integrated continuous pipeline.
 
 In light of these advantages, there is a clear intention within our
-organisation (DYNE) to keep maintaining DECODE OS also beyond the span
-of the project and this very task now concluded, since it greatly
-helps the manning of prototypes into stable production environments.
+organisation (mainly by DYNE) to keep maintaining DECODE OS also
+beyond the span of the project and this very task now concluded, since
+it greatly helps the manning of prototypes into stable production
+environments.
 
 

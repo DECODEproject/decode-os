@@ -30,10 +30,10 @@ Abstract
   * Once the POST request is received, the node will validate the
     request and return a secret encrypted with the requester's public
     key.
-  * The requester will try to decrypt this secret, and return it plain
-    back to the node it's announcing to, along with a cryptographic
-    signature, so the node can confirm the requester is in actual
-    possession of the private key.
+  * The requester will try to decrypt this secret, and return the
+    secret in plain text back to the node it's announcing to, along
+    with a cryptographic signature, so the node can confirm the
+    requester is in actual possession of the private key.
 * Tor DAM **does not validate** if a node is malicious or not. This is a
   layer that has to be established on top. Tor DAM is just the entry
   point into the network.
@@ -66,11 +66,11 @@ correct example.
 }
 ```
 
-Sending this as a POST request to a node will make it ask for the public
-key of the given address from a HSDir in the Tor network. It will
-retrieve the public key and try to validate the signature that was made.
-Validating this, we assume that the requester is in possession of the
-private key.
+Sending this as a POST request to a node will make it ask for the
+public key of the given address from a "hidden service directory"
+(HSDir) in the Tor network. It will retrieve the public key and try to
+validate the signature that was made.  Validating this, we assume that
+the requester is in possession of the private key.
 
 Following up, the node shall generate a cryptographically secure random
 string and encrypt it using the before acquired public key. It will then
@@ -86,6 +86,7 @@ be encoded using base64 and sent back to the client:
 The client will try to decode and decrypt this secret, and send it back
 to the node to complete its part of the handshake. The POST request this
 time will contain the following data:
+
 * `type` reflects the type of the node
 * `address` holds the address of the Tor hidden service
 * `message` is the decrypted and base64 encoded secret that the server

@@ -9,10 +9,10 @@ glues together.
 Configuration
 -------------
 
-Much of the libdevuansdk configuration is done in `libdevuansdk/config`.
-Here you can edit the defaults if you wish to do something your needs
-are expressing. However, overriding these through upper levels is
-recommended.
+Much of the _libdevuansdk_ configuration is done in
+`libdevuansdk/config`.  Here you can edit the defaults if you wish to
+do something your needs are expressing. However, overriding these
+through upper levels is recommended.
 
 
 ### `config` file
@@ -54,28 +54,29 @@ Helper functions
 ----------------
 
 You can find useful helper functions in `libdevuansdk/zlibs/helpers`.
-They are intended to help when it comes to writing wrappers, as well as
-making the developers' jobs easier for developing libdevuansdk. Some of
-these functions are required for libdevuansdk to work properly as well.
+They are intended to help when it comes to writing wrappers, as well
+as making the developers' jobs easier for developing
+_libdevuansdk_. Some of these functions are required for
+_libdevuansdk_ to work properly as well.
 
 
 ### `build_image_dist()`
 
-This function is a kind of a wrapper function. It's used in arm-sdk to
-build a complete dd-able image from start to end. To run, it requires
-`$arch`, `$size`, `$parted_type`, `$workdir`, `$strapdir`, and
-`$image_name` to be declared. See the part of "Creating wrappers" for
-insight on these variables.
+This function is a kind of a wrapper function. It's used in _arm-sdk_
+to build a complete dd-able image from start to end. To run, it
+requires `$arch`, `$size`, `$parted_type`, `$workdir`, `$strapdir`,
+and `$image_name` to be declared. See the section dedicated to
+"Creating wrappers" for insight on these variables.
 
-The workflow of this function is bootstrapping a complete rootfs,
-creating a raw image, installing/compiling a kernel, rsyncing everything
-to the raw image, and finally compressing the raw image.
+The workflow of this function is bootstrapping a complete _rootfs_,
+creating a raw image, installing/compiling a kernel, rsyncing
+everything to the raw image, and finally compressing the raw image.
 
 This same workflow is applied in the next two functions in this file,
 which are `build_iso_dist` and `build_vagrant_dist`. To get a better
-understanding of libdevuansdk, it's recommended to go through one of
-these functions and following it deeper to find and figure out the other
-functions and how they work together.
+understanding of _libdevuansdk_, it's recommended to go through one of
+these functions and following it deeper to find and figure out the
+other functions and how they work together.
 
 
 ### `devprocsys()`
@@ -96,18 +97,18 @@ access to hardware or the system's resources, i.e. cryptography.
 
 ### `dpkgdivert()`
 
-This function, like `devprocsys` takes two arguments and will create or
-remove a dpkg diversion in the place you tell it to and remove
-`invoke-rc.d` so that apt does not autostart daemons when they are
+This function, like `devprocsys` takes two arguments and will create
+or remove a dpkg diversion in the place you tell it to and remove
+`invoke-rc.d` so that _apt_ does not autostart daemons when they are
 installed.
 
 
 ### `chroot-script()`
 
-This very useful functions allows you to chroot into `$strapdir` and
-execute the script/binary that's passed as a parameter to this function.
-It also takes an optional argument `-d` that will call dpkgdivert on and
-off before and after execution.
+This very useful functions allows you to _chroot_ into `$strapdir` and
+execute the script/binary that's passed as a parameter to this
+function.  It also takes an optional argument `-d` that will call
+`dpkgdivert` on and off before and after execution.
 
 The `chroot-script` is also an example on its own that shows how to use
 the `chroot-script` function.
