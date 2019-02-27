@@ -317,14 +317,14 @@ deb http://pkgmaster.devuan.org/merged ascii          main
 deb http://pkgmaster.devuan.org/merged ascii-updates  main
 deb http://pkgmaster.devuan.org/merged ascii-security main
 deb http://deb.torproject.org/torproject.org stretch  main
-deb http://deb.torproject.org/torproject.org tor-experimental-0.3.4.x-stretch main
+deb http://deb.torproject.org/torproject.org tor-experimental-0.4.0.x-stretch main
 
 ## source repositories
 #deb-src http://pkgmaster.devuan.org/merged ascii          main
 #deb-src http://pkgmaster.devuan.org/merged ascii-updates  main
 #deb-src http://pkgmaster.devuan.org/merged ascii-security main
 #deb-src http://deb.torproject.org/torproject.org stretch  main
-#deb-src http://deb.torproject.org/torproject.org tor-experimental-0.3.4.x-stretch main
+#deb-src http://deb.torproject.org/torproject.org tor-experimental-0.4.0.x-stretch main
 EOF
 }
 ## }}}
