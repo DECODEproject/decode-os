@@ -114,6 +114,8 @@ git pull origin master && git submodule update --init --recursive --checkout
 
 ### Building for ARM targets
 
+A more detailed reference for the arm-sdk can be found here: https://git.devuan.org/sdk/arm-sdk
+
 ```
 cd arm-sdk # (or vm-sdk or live-sdk depending from your target)
 zsh -f
@@ -123,6 +125,7 @@ bootstrap_complete_base
 ```
 
 Here is the list of the supported boxes: https://git.devuan.org/sdk/arm-sdk/blob/master/sdk 
+
 
 ### Building for VM targets
 
