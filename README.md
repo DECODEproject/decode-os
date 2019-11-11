@@ -119,6 +119,7 @@ A more detailed reference for the arm-sdk can be found here: https://git.devuan.
 ```
 cd arm-sdk # (or vm-sdk or live-sdk depending from your target)
 zsh -f
+./init.sh # and when this is done, execute the command in the bottom of the output
 source sdk
 load devuan raspi3 decode # (replace "raspi3" with your board name, from the list below)
 bootstrap_complete_base
