@@ -117,9 +117,10 @@ git pull origin master && git submodule update --init --recursive --checkout
 ```
 cd arm-sdk # (or vm-sdk or live-sdk depending from your target)
 source sdk
-load devuan sunxi decode # (specific to the arm-sdk)
+load devuan raspi3 decode # (replace "raspi3" with the board name you want to build, from this list https://git.devuan.org/sdk/arm-sdk/blob/master/sdk )
 bootstrap_complete_base
 ```
+
 
 ### Building for VM targets
 
