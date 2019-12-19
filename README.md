@@ -11,7 +11,7 @@ peer-to-peer network cluster.
 
 </div>
 
-<img src="https://decodeos.dyne.org/img/decodeos_logo-800px.jpg" class="pic" alt="DECODE OS logo">
+<img src="https://www.dyne.org/wp-content/uploads/2019/12/decode-os_only-logo.png" class="pic" alt="DECODE OS logo">
 
 | Features                                   | Components                                                                                                                                                                                                  |
 |--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
