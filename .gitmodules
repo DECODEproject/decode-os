@@ -1,12 +1,12 @@
 [submodule "vm-sdk"]
 	path = vm-sdk
-	url = https://git.devuan.org/devuan-sdk/vm-sdk/vm-sdk.git
+	url = https://git.devuan.org/devuan-sdk/vm-sdk
 [submodule "arm-sdk"]
 	path = arm-sdk
-	url = https://git.devuan.org/devuan-sdk/arm-sdk/arm-sdk.git
+	url = https://git.devuan.org/devuan-sdk/arm-sdk
 [submodule "live-sdk"]
 	path = live-sdk
-	url = https://git.devuan.org/devuan-sdk/live-sdk/live-sdk.git
+	url = https://git.devuan.org/devuan-sdk/live-sdk
 [submodule "docs/webnomad"]
 	path = docs/webnomad
 	url = https://github.com/dyne/webnomad
